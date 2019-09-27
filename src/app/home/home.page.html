@@ -1,0 +1,52 @@
+<ion-header translucent="true" no-border>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content no-padding class="background">
+
+  <!-- <ion-slides [options]="imgSlideOpt">
+    <ion-slide *ngFor="let image of imageArray">
+      <img src= "{{image.image}}" height="20" width="20"/>
+    </ion-slide>
+  </ion-slides> -->
+  <div class="greetings">
+    <img src="../../assets/images/Promotionla_Image_banner_Sept_2017.jpg"/>
+    <div class="myOverlay">
+      <div class="messages">
+        <!-- <div id="greeting">test</div> -->
+        <div>{{greet}}</div>
+        <script type= "text/javascript"></script>
+        <p>Enchanted wardrobe employee</p>
+      </div>
+    </div>
+  </div>
+
+  <ion-item-divider color="light">
+    <ion-label>Recent promotions</ion-label>
+    <ion-button class="ion-margin-end" size="small" slot="end" color="secondary" fill="outline" (click)="viewDetails()">
+      <ion-icon name="arrow-round-forward"></ion-icon>
+    </ion-button>
+  </ion-item-divider>
+  
+  <ion-grid>
+    <ion-col>
+      <ion-slides [options]="imgSlideOpt">
+        <ion-slide *ngFor="let promo of promotions">
+          <ion-card (click)="viewDetails()">
+            <img [src]="promo.url"/>
+            <ion-card-header>
+              <ion-card-title>{{promo.Name}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              {{ promo.Description }}
+            </ion-card-content>
+          </ion-card>
+          </ion-slide>
+      </ion-slides>
+
+    </ion-col>
+  </ion-grid>
+  <script src="../../assets/js/greetings.js"></script>
+</ion-content>

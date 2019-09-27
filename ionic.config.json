@@ -1,0 +1,7 @@
+{
+  "name": "promoApp",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

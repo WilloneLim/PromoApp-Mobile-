@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Promotions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-slides [options]="imgSlideOpt">
+        <ion-slide *ngFor="let promo of promotion">
+          <ion-card no-padding>
+            <img [src]="promo.img"/>
+            <ion-card-header>
+              <ion-card-title>{{promo.title}}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              Description
+            </ion-card-content>
+          </ion-card>
+          </ion-slide>
+      </ion-slides>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+	<div id="profile-info" >
+		<ion-grid>
+			<ion-grid>
+				<ion-row>
+					<ion-col size="4" class="user-image">
+						<ion-img src="https://ucarecdn.com/{{ profilePic }}/"></ion-img>
+					</ion-col>
+					<ion-col size="8">
+						<p>{{ username }}</p>
+					</ion-col>
+				</ion-row>
+			</ion-grid>
+				
+			<ion-row>
+			<ion-col class="mid">
+					<input type="file" *ngIf="!imageURL" (change)="fileChanged($event)" class="filebtn" #filebutton/>
+
+					<ion-card>
+						<img *ngIf="imageURL" src ="https://ucarecdn.com/{{ imageURL }}/"/>
+					</ion-card>
+				
+			</ion-col>
+				<ion-col size="12">
+					<ion-button expand="block" color="primary" style="text-transform: none;" routerLink="/edit-profile">Edit Profile</ion-button>
+					<ion-button expand="block" color="danger" style="text-transform: none;" (click)="logout()">Log Out</ion-button>
+					<ion-button expand="block" color="primary" style="text-transform: none" (click)="openImagePickerCrop()">Select Photo (Crop)</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</div>
+
+</ion-content>
