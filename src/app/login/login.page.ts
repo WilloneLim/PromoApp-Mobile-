@@ -19,10 +19,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  
+
   async login(){
     const { username, password } = this
     try {
-			const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@gmail.com', password)
+			const res = await this.afAuth.auth.signInWithEmailAndPassword(username + '@email.com', password)
 			
 			if(res.user) {
 				this.user.setUser({
@@ -32,8 +34,9 @@ export class LoginPage implements OnInit {
 
 				this.username = ""
 				this.password = ""
+
 				
-				console.log("Welcome" + " " + username)
+				console.log("Welcome" + " " + username + " " + this.user.getUID())
 				this.router.navigate(['/tabs'])
 			}
 		

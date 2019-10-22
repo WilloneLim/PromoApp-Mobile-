@@ -25,7 +25,7 @@ export class UserService {
 	}
 
 	reAuth(username: string, password: string) {
-		return this.afAuth.auth.currentUser.reauthenticateWithCredential(auth.EmailAuthProvider.credential(username + '@gmail.com', password))
+		return this.afAuth.auth.currentUser.reauthenticateWithCredential(auth.EmailAuthProvider.credential(username + '@email.com', password))
 	}
 
 	updatePassword(newpassword: string) {
@@ -33,7 +33,7 @@ export class UserService {
 	}
 
 	updateEmail(newemail: string) {
-		return this.afAuth.auth.currentUser.updateEmail(newemail + '@gmail.com')
+		return this.afAuth.auth.currentUser.updateEmail(newemail + '@email.com')
 	}
 
 	async isAuthenticated() {

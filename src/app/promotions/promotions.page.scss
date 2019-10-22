@@ -1,0 +1,29 @@
+.promodate{
+    background: rgb(218, 215, 215);
+    color: #34acf7;
+    border: 2px solid transparent;
+    border-radius: 8px;
+  }
+
+ ion-card {
+   display: block;
+ }
+
+ ion-content {
+   text-align: center;
+ }
+
+ .promodate {
+   outline: none;
+ }
+
+ .sticky {
+   top: 7.3%;
+   position: fixed;
+   width: 100%;
+   z-index: 1;
+ }
+
+ ion-button {
+   --background: #fc6435;
+ }

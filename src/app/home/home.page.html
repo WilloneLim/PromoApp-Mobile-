@@ -1,4 +1,4 @@
-<ion-header translucent="true" no-border>
+<ion-header>
   <ion-toolbar>
     <ion-title>Home</ion-title>
   </ion-toolbar>
@@ -12,35 +12,34 @@
     </ion-slide>
   </ion-slides> -->
   <div class="greetings">
-    <img src="../../assets/images/Promotionla_Image_banner_Sept_2017.jpg"/>
-    <div class="myOverlay">
-      <div class="messages">
-        <!-- <div id="greeting">test</div> -->
-        <div>{{greet}}</div>
-        <script type= "text/javascript"></script>
-        <p>Enchanted wardrobe employee</p>
-      </div>
-    </div>
+  <div class="module">
+    <span><b>{{greet}}</b>,</span>
+    <br/>
+    <span>Enchanted wardrobe</span>
+  </div>
   </div>
 
-  <ion-item-divider color="light">
+
+  <ion-item-divider>
     <ion-label>Recent promotions</ion-label>
-    <ion-button class="ion-margin-end" size="small" slot="end" color="secondary" fill="outline" (click)="viewDetails()">
+    <ion-button class="ion-margin-end" size="small" slot="end"  fill="outline" (click)="viewDetails()">
       <ion-icon name="arrow-round-forward"></ion-icon>
     </ion-button>
   </ion-item-divider>
   
   <ion-grid>
     <ion-col>
-      <ion-slides [options]="imgSlideOpt">
+      <ion-slides [options]="imgSlideOpt" class="slides">
         <ion-slide *ngFor="let promo of promotions">
           <ion-card (click)="viewDetails()">
             <img [src]="promo.url"/>
             <ion-card-header>
               <ion-card-title>{{promo.Name}}</ion-card-title>
             </ion-card-header>
-            <ion-card-content>
-              {{ promo.Description }}
+            <ion-card-content class="botdes">
+              <p>{{ promo.Description }}</p>
+              
+              <p class="promodate">{{promo.startDate}} - {{promo.endDate}}</p>
             </ion-card-content>
           </ion-card>
           </ion-slide>

@@ -1,0 +1,47 @@
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:400,700");
+
+.body {
+    padding-top: 25px;
+}
+
+.transactionMSG {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.transactionPrmpt {
+    padding-top: 20px;
+}
+
+.inputAmt {
+    padding-top: 10px;
+}
+
+#enterAmt {
+    border: none;
+    border-bottom: 1px solid #ebe8e8;
+    margin-left: 10px;
+}
+
+#enterAmt:focus {
+    border-bottom: 1px solid #fc6435;
+}
+
+input[type="text"], textarea, select { 
+    outline: none;
+}
+
+.enterbtn {
+    background-color: #fc6435;
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 8px 2px;
+    cursor: pointer;
+    width: 100%;
+}

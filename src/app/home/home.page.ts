@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router'
 import * as firebase from 'Firebase';
 import { getData } from '../../app/getData.service';
+import { IonSlides, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +12,18 @@ import { getData } from '../../app/getData.service';
 export class HomePage implements OnInit {
 
   promotions: any;
-
-  //imageArray: any = [];
   public greet;
+ 
+
+  @ViewChild(IonSlides) slides:IonSlides;
   constructor(
     public router:Router,
-    private getData: getData
+    private getData: getData,
+    private platform: Platform
     ) {
   
   var myDate = new Date();
   var hrs = myDate.getHours();
-
-  var greet;
 
   if (hrs < 12)
     this.greet = "Good Morning";
@@ -41,11 +42,13 @@ export class HomePage implements OnInit {
   // ]
   }
 
-  promotion = [
-    { img : 'https://firebasestorage.googleapis.com/v0/b/promotion-178a2.appspot.com/o/Images%2Fpromotion.jpg?alt=media&token=9deb8391-c13d-42c0-b5cc-96aab312f729', title : 'sample' },
-    { img : 'https://firebasestorage.googleapis.com/v0/b/promotion-178a2.appspot.com/o/Images%2Fpromotion.jpg?alt=media&token=9deb8391-c13d-42c0-b5cc-96aab312f729', title : 'sample2'},
-    { img : 'https://firebasestorage.googleapis.com/v0/b/promotion-178a2.appspot.com/o/Images%2Fpromotion.jpg?alt=media&token=9deb8391-c13d-42c0-b5cc-96aab312f729', title : 'sample3'}
-  ]
+
+  ionViewWillLeave(){
+    this.slides.stopAutoplay();
+  }
+  ionViewDidEnter(){
+    this.slides.startAutoplay();
+  }
   
   imgSlideOpt = {
     initialSlide: 0,
@@ -54,14 +57,18 @@ export class HomePage implements OnInit {
   };
   
   ngOnInit(): void {
+
+
     this.getData.read_promotion().subscribe(data => {
  
       this.promotions = data.map(e => {
         return {
           id: e.payload.doc.id,
-          Description: e.payload.doc.data()['Description'],
-          Name: e.payload.doc.data()['Name'],
-          url: e.payload.doc.data()['url'],
+          Description: e.payload.doc.data()['desc'],
+          Name: e.payload.doc.data()['title'],
+          url: e.payload.doc.data()['image'],
+          startDate: e.payload.doc.data()['startdate'],
+          endDate: e.payload.doc.data()['enddate'],
         };
       })
       console.log(this.promotions);
@@ -70,7 +77,7 @@ export class HomePage implements OnInit {
    
   }
 
-  viewDetails(){
+  viewDetails() {
     this.router.navigate(['/tabs/promotions']);
   }
 

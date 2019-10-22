@@ -1,10 +1,15 @@
-.center{
+.center {
     margin-left: auto;
     margin-right: auto;
     display: block;
 }
 
-.formcs{
+.formcs {
    
     --background: #f5f6f9;
+}
+
+ion-input .input, button{
+    outline: none;
+    border: none;
 }

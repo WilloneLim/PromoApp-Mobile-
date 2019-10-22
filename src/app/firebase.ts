@@ -1,11 +1,11 @@
 const firebaseConfig = {
-    apiKey: "AIzaSyBx5b3xiqUhA3sLsbXwcxR7dBnAj6JRews",
-    authDomain: "promotion-178a2.firebaseapp.com",
-    databaseURL: "https://promotion-178a2.firebaseio.com",
-    projectId: "promotion-178a2",
-    storageBucket: "promotion-178a2.appspot.com",
-    messagingSenderId: "337954356849",
-    appId: "1:337954356849:web:2a174f86fc62e920"
+  apiKey: "AIzaSyCA_sMgKuNxk2ngSqJRSX8aAvmrn80fBPo",
+  authDomain: "onlinepromoapp.firebaseapp.com",
+  databaseURL: "https://onlinepromoapp.firebaseio.com",
+  projectId: "onlinepromoapp",
+  storageBucket: "onlinepromoapp.appspot.com",
+  messagingSenderId: "676214878219",
+  appId: "1:676214878219:web:d92eba79494c6e3c37970e"
   };
 
   export default firebaseConfig

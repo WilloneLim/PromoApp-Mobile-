@@ -15,6 +15,7 @@ import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { HttpModule } from '@angular/http';
 import { AuthService } from './auth.service';
+import { canGoBack } from './canGoBack.Service';
 
 
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
@@ -23,6 +24,19 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FirebaseService } from '../service/firebase.service';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { File } from '@ionic-native/file/ngx';
+
+import { NgxQRCodeModule } from 'ngx-qrcode2';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
+import { Camera } from '@ionic-native/Camera/ngx';
+import { QRService } from '../app/qr.service';
+import { ModalPagePageModule } from '../app/modal-page/modal-page.module';
+import { AboutmodalPageModule } from '../app/aboutmodal/aboutmodal.module';
+
+
+
+ 
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +50,11 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     AngularFirestoreModule,
     HttpModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxQRCodeModule,
+    ModalPagePageModule,
+    AboutmodalPageModule
+   
     
   ],
   providers: [
@@ -48,7 +66,13 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     UserService,
     WebView,
-    AuthService
+    AuthService,
+    File,
+    BarcodeScanner,
+    canGoBack,
+    File,
+    Camera,
+    QRService
   ],
   bootstrap: [AppComponent]
 })

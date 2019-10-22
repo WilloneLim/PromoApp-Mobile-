@@ -5,6 +5,7 @@
 </ion-header>
 
 <ion-content padding class="formcs">
+  <div class = "login">
   <ion-list>
 
     <ion-item>
@@ -23,10 +24,13 @@
 
   </ion-list>
 
-  <ion-button fill="solid" expand="block" color="dark" (click)="login()">Login</ion-button>
+  <ion-button fill="solid" expand="block" color="dark" class="submitbtn" (click)="login()">Login</ion-button>
   <ion-row>
     <div class="center">
       Create an account, <a routerLink="/register" style="text-decoration:none">Register</a>
     </div>
   </ion-row>
+</div>
+<script>
+</script>
 </ion-content>

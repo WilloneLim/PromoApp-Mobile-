@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end">
+          <ion-icon name="close" class="exitbtn" (click)="closeModal()"></ion-icon>
+      </ion-buttons>
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+          <ion-col text-center>
+            <span class="textSuccess">Transaction completed</span>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <!-- <ion-img id="transactionimg" [src]="'https://firebasestorage.googleapis.com/v0/b/onlinepromoapp.appspot.com/o/dogface_celebrate_final.gif?alt=media&token=583c343d-0465-419a-93b8-117e9171dbda'"></ion-img> -->
+            <div class="success-checkmark">
+              <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>
