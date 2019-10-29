@@ -14,6 +14,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth'
 import { UserService } from './user.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { canGoBack } from './canGoBack.Service';
 
@@ -33,6 +34,7 @@ import { Camera } from '@ionic-native/Camera/ngx';
 import { QRService } from '../app/qr.service';
 import { ModalPagePageModule } from '../app/modal-page/modal-page.module';
 import { AboutmodalPageModule } from '../app/aboutmodal/aboutmodal.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -53,7 +55,9 @@ import { AboutmodalPageModule } from '../app/aboutmodal/aboutmodal.module';
     AngularFireDatabaseModule,
     NgxQRCodeModule,
     ModalPagePageModule,
-    AboutmodalPageModule
+    AboutmodalPageModule,
+    HttpClientModule,
+    ReactiveFormsModule,
    
     
   ],

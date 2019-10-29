@@ -77,8 +77,10 @@ export class AccountPage implements OnInit {
    ]
 
     this.mainuser = afstore.doc(`users/${user.getUID()}`)
+    console.log(this.mainuser);
 
     this.sub = this.mainuser.valueChanges().subscribe(event => {
+      
       this.username = event.username
       this.profilePic = event.profilePic
     })
@@ -151,7 +153,7 @@ export class AccountPage implements OnInit {
 
   pickImage(sourceType) {
     const options: CameraOptions = {
-    quality: 100,
+    quality: 50,
     sourceType: sourceType,
     //allowEdit: true,
     //targetWidth:820,
@@ -219,7 +221,7 @@ export class AccountPage implements OnInit {
   // }
  
   cropImage(imgPath) {
-    this.cropService.crop(imgPath, { quality: 100 })
+    this.cropService.crop(imgPath, { quality: 50 })
       .then(
         newPath => {
           this.showCroppedImage(newPath.split('?')[0])

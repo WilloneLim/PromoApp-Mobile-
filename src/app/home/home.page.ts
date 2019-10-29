@@ -3,6 +3,10 @@ import { Router } from '@angular/router'
 import * as firebase from 'Firebase';
 import { getData } from '../../app/getData.service';
 import { IonSlides, Platform } from '@ionic/angular';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { snapshotChanges } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -13,13 +17,17 @@ export class HomePage implements OnInit {
 
   promotions: any;
   public greet;
+  public title: string;
+  promolist = [];
  
 
   @ViewChild(IonSlides) slides:IonSlides;
   constructor(
     public router:Router,
     private getData: getData,
-    private platform: Platform
+    private platform: Platform,
+    private afs: AngularFirestore,
+    private afAuth: AngularFireAuth
     ) {
   
   var myDate = new Date();
@@ -32,14 +40,6 @@ export class HomePage implements OnInit {
   else if (hrs >= 17 && hrs <= 24)
     this.greet = "Good Evening";
 
-    // alert(greet);
-
-  //   this.imageArray = [
-  //     {'image':'../../assets/images/Promotionla_Image_banner_Sept_2017.jpg'},
-  //     {'image':'../../assets/images/Propety-promotion-feature-Image.jpg'},
-  //     {'image':'../../assets/images/promotions.png'},
-  //     {'image':'../../assets/images/promotional-email-examples.jpg'}
-  // ]
   }
 
 
@@ -53,10 +53,37 @@ export class HomePage implements OnInit {
   imgSlideOpt = {
     initialSlide: 0,
     slidesPerView: 1,
-    autoplay: true
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false
+    }
   };
   
   ngOnInit(): void {
+   const postData = [];
+   var userid = this.afAuth.auth.currentUser;
+   var getid = userid.uid;
+   console.log(getid);
+   
+
+
+  //  this.afs.firestore.collection('promotions')
+  //  .where('promoter', '==', getid)
+  //  .get()
+  //  .then(function(querySnapshot){
+  //    querySnapshot.forEach(doc=>{
+  //       //console.log(doc.id, "=>", doc.data());
+  //       this.promolist.push({
+  //         id: doc.id,
+  //         Name: doc.data().title,
+  //         Description: doc.data().desc,
+  //         startDate: doc.data().startdate,
+  //       })
+  //    });
+  //  }).catch(function(error){
+  //    console.log(error);
+  //  })
+
 
 
     this.getData.read_promotion().subscribe(data => {

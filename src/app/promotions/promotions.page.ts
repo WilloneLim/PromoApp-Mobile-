@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { getData } from '../../app/getData.service';
-import { IonInfiniteScroll, Platform } from '@ionic/angular';
+import { IonInfiniteScroll, Platform, ToastController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
 import { NgxQRCodeModule } from 'ngx-qrcode2';
 import { NavController } from '@ionic/angular';
@@ -15,7 +15,11 @@ import { UserService } from '../user.service';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase';
 import { snapshotChanges } from '@angular/fire/database';
-
+import { controlNameBinding } from '@angular/forms/src/directives/reactive_directives/form_control_name';
+import { switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import * as firebase from 'firebase/app';
+import { map } from 'rxjs/operators';
 
 
 @Component({
@@ -29,7 +33,6 @@ export class PromotionsPage implements OnInit {
   claim: any;
   qrScan: any;
 
-  ////////////////
   public collectionid: string;
   public ref: any;
   item:any;
@@ -40,8 +43,10 @@ export class PromotionsPage implements OnInit {
   encodedData:any = {};
   scannedData:any = {};
   preventBack: any;
-  checkPromo = false;
-  
+  postRef: any;
+  post: any;
+  posts: any;
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   constructor(
@@ -56,7 +61,8 @@ export class PromotionsPage implements OnInit {
     public route: ActivatedRoute,
     public user: UserService,
     public afAuth: AngularFireAuth,
-    public router: Router
+    public router: Router,
+    public toast: ToastController
 
   ) { 
     //Exit scanner when back button is pressed
@@ -76,28 +82,80 @@ export class PromotionsPage implements OnInit {
     //     console.log("TOO BAD!");
     //   }
     // })
-    
-    
-    // let check = this.afs.firestore.collection('claiming')
-    // .where("title", "==", PromotionTitle);
-    //  console.log(check);
-
-    this.getData.read_promotion().subscribe(data => {
+      var s:any;
+      var label: any = {};
+      let user = this.afAuth.auth.currentUser;
+      var uid;
       
-      this.promotions = data.map(e => {
+      if(user != null) {
+      uid = user.uid;
+      console.log(uid);
+      }
+      
+
+     
+    const docs = this.afs.collection('promoters');
+    const userInfo = docs.snapshotChanges().subscribe(
+      data => {
+        this.promotions = data.map(e=>{ 
         return {
           id: e.payload.doc.id,
-          Description: e.payload.doc.data()['desc'],
           Name: e.payload.doc.data()['title'],
-          url: e.payload.doc.data()['image'],
-          startDate: e.payload.doc.data()['startdate'],
-          endDate: e.payload.doc.data()['enddate'],
-          
+          Description: e.payload.doc.data()['desc']
         };
       })
-      console.log(this.promotions);
+    })
+
+        // this.afs.firestore.collection('promoters').doc(uid).get()
+        // .then(doc=>{
+        //    var a = doc.data().promotions
+        //    console.log(a);
+        //    this.afs.firestore.collection('promotions').doc()
+        //    .get().then(doc2=>{
+        //      this.promotions = doc2.map(e=>{
+        //        return {
+        //         id: e.payload.doc.id,
+        //         Author: e.payload.doc.data()['author'],
+        //         Description: e.payload.doc.data()['desc'],
+        //        };
+        //      })
+        //    })
+        // })
+    
+      
+    
+    // this.getData.read_promotion().subscribe(data => {
+      
+    //   this.promotions = data.map(e => {
+        
+    //     return {
+    //       id: e.payload.doc.id,
+    //       Description: e.payload.doc.data()['desc'],
+    //       Name: e.payload.doc.data()['title'],
+    //       url: e.payload.doc.data()['image'],
+    //       startDate: e.payload.doc.data()['startdate'],
+    //       endDate: e.payload.doc.data()['enddate'],
+        
+    //     };
+      
+    //   })
+  
+    //   console.log(this.promotions);
  
-    });
+    // });
+
+    
+      this.afs.firestore.collection('claiming').get().then((snapshot)=>{
+        snapshot.docs.forEach(doc1 => {
+          console.log(doc1.id + " "
+          + doc1.data().title)
+          
+          var data1 = doc1.data();
+          var labeldata = doc1.data();
+          var promotionTitle = data1.title;
+          var promotionID = data1.promotion;
+        })
+      })
   }
 
   async presentAlert(title: string, content: string){
@@ -108,6 +166,7 @@ export class PromotionsPage implements OnInit {
       })
       await alert.present()
   }
+
 
   scanQRCode () {
     this.options= {
@@ -124,41 +183,54 @@ export class PromotionsPage implements OnInit {
       console.log(data.text.length);
       let qrlength = data.text.length;
 
-    //   this.afs.firestore.collection('claiming').get().then((snapshot)=>{
-    //     snapshot.docs.forEach(doc1 => {
-    //       console.log(doc1.id + " "
-    //       + doc1.data().title)
+      if( qrlength <= 20|| qrlength >= 20){
+        this.navCtrl.navigateForward('/transactions');
+      }
 
-    //       var data1 = doc1.data();
-    //       var promotionTitle = data1.title;
-    //       var promotionID = data1.promotion;
+      // this.afs.firestore.collection('claiming').get().then((snapshot)=>{
+      //   snapshot.docs.forEach(doc1 => {
+      //     console.log(doc1.id + " "
+      //     + doc1.data().title)
+          
+      //     var data1 = doc1.data();
+      //     var labeldata = doc1.data();
+      //     var promotionTitle = data1.title;
+      //     var promotionID = data1.promotion;
+      //   })
+      // })
 
       // this.afs.firestore.collection('promotions').get().then((snapshot)=>{
       //   snapshot.docs.forEach(doc2 => {
       //     console.log(doc2.id + " "
       //     + doc2.data().title)
 
-          // var data2 = doc2.data();
-          // var promotionTitle2 = data2.title;
-          // var promotionID2 = doc2.id;
-          // var promoter = data2.promoter;
+      //     var data2 = doc2.data();
+      //     var promotionTitle2 = data2.title;
+      //     var promotionID2 = doc2.id;
+      //     var promoter = data2.promoter;
+      //   })
+      // })
           
+          //if (claiminig . promtions == promotions . docid )
+          // this.afs.firestore.collection('promoters').doc(user.uid)
+          // .get().then(doc=>{
 
-          // if(doc1.exists){
-          //   if(qrlength == 20 && promotionTitle == promotionTitle2 && promotionID == promotionID2){
-              this.navCtrl.navigateForward('/transactions');
-              
-          //   }else{
-          //     return this.presentAlert('Error','Invalid QR Code') 
-          //   }
-          // }else if(this.user.getUID != promoter && promoter == null){
-          //     return this.presentAlert('Error', 'QR Code intended for different user')
-              
-          //   }else{
-          //   return this.presentAlert('Error','QR Not Found')
-          // }
           
-
+        //   if(doc1.exists){
+        //     if(qrlength == 20 && promotionTitle == promotionTitle2 && promotionID == promotionID2){
+        //       this.navCtrl.navigateForward('/transactions');
+              
+        //     }else{
+        //       return this.presentAlert('Error','Invalid QR Code') 
+        //     }
+        //   }else if(this.user.getUID != promoter && promoter == null){
+        //       return this.presentAlert('Error', 'QR Code intended for different user')
+              
+        //     }else{
+        //     return this.presentAlert('Error','QR Not Found')
+        //   }
+          
+        // })
            
            
         //  if(){
@@ -166,15 +238,13 @@ export class PromotionsPage implements OnInit {
         //  }else{
         //   return this.presentAlert('Error','Invalid QRCODE')
         //  }
-        //}else{
-          //return this.presentAlert('Error','Invalid QRCODE')
-        //}
-            //   })
-            // })
-          // })
-      //   })
-      // }, (err) => {
-      // console.log('Error: ',err);
+
+        // }else{
+        //   return this.presentAlert('Error','Invalid QRCODE')
+        // }
+            
+      }, (err) => {
+      console.log('Error: ',err);
     })
   }
 

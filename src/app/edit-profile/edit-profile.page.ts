@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Http } from '@angular/http';
 import { AlertController } from '@ionic/angular';
 import { UserService } from '../user.service';
-import { Crop } from '@ionic-native/crop/ngx';
 
 
 @Component({
@@ -31,7 +30,6 @@ export class EditProfilePage implements OnInit {
 		private afs: AngularFirestore,
 		private router: Router,
     private alertController: AlertController,
-    private cropService: Crop,
 		private user: UserService) {
     this.mainuser = afs.doc(`users/${user.getUID()}`)
     this.sub = this.mainuser.valueChanges().subscribe(event => {
@@ -52,17 +50,11 @@ export class EditProfilePage implements OnInit {
 		this.fileBtn.nativeElement.click()
   }
   
-  
-  cropImage(imgPath) {
-    this.cropService.crop(imgPath, { quality: 50 })
-      
-    }
  
   uploadPic(event){
     const files = event.target.files
 
     const data = new FormData()
-    this.cropImage(data);
     data.append('file',files[0])
     data.append('UPLOADCARE_STORE','1')
     data.append('UPLOADCARE_PUB_KEY','bb32f8bcf74a6c19b8fd')

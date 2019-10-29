@@ -16,16 +16,28 @@
   //     height: 100%!important;
   //   }
 
-  .greetings{
+
+  ion-toolbar {
+    --background:  transparent !important;
+    --ion-color-base: transparent !important;
     
+  }
+
+  .greetings{
     background: linear-gradient(
       rgba(231, 91, 10, 0.564),
       rgba(0, 0, 0, 0.5)
     ),url(../../assets/images/bgpromo.jpg);
-    background-size: cover;
+    background-size: cover !important;
     position: relative;
     height: 160px;
+    border-color: transparent !important;
+    background-repeat: no-repeat !important;
   }
+  
+  .scroll-content {
+    padding-top: 0 !important;
+}
 
   .module{
     position: absolute;
@@ -38,7 +50,6 @@
   }
 
 
-
 //  ion-card{
 //     display: contents;
 //     flex-direction: column;
@@ -48,6 +59,7 @@
 
 .background{
    //--background: #fff;
+  
 }
 
 ion-toolbar{

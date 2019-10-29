@@ -4,12 +4,16 @@ import { Platform, IonRouterOutlet, AlertController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+
+  showSplash = true; // <-- show animation
+
   @ViewChild(IonRouterOutlet) routerOutlet: IonRouterOutlet;
   constructor(
     private platform: Platform,
@@ -19,6 +23,7 @@ export class AppComponent {
     private router: Router,
   ) {
     this.initializeApp();
+
 
     this.platform.backButton.subscribe(() => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {

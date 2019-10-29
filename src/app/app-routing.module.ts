@@ -12,9 +12,6 @@ const routes: Routes = [
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'transactions', loadChildren: './transactions/transactions.module#TransactionsPageModule' },
-  
-  
-
 
 
 ];

@@ -8,15 +8,15 @@
   <div class="QRScanner">
     <ion-button expand="block" icon-left (click)="scanQRCode()"><ion-icon name="qr-scanner"></ion-icon>Scan code</ion-button>
   </div>
-  <ion-card *ngIf="scannedData">
+  <!-- <ion-card *ngIf="scannedData">
     <ion-card-content>
       <p>QR CODE: {{scannedData}}</p>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
   <ion-grid>
     <ion-row>
       <ion-card no-padding *ngFor="let promo of promotions">
-        <img [src]="promo.url"/>
+        <img *ngIf="promo.url" [src]="promo.url"/>
         <ion-card-header>
           <ion-card-title>{{promo.Name}}</ion-card-title>
         </ion-card-header>

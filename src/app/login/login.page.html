@@ -1,36 +1,32 @@
 <ion-header translucent="true">
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-title>Login</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content padding class="formcs">
-  <div class = "login">
-  <ion-list>
+   <div class="login"> 
+     <ion-list class="bg-transparent">
+      <ion-item color="none">
+        <ion-label position="floating">
+          <ion-icon name="mail"></ion-icon> Email</ion-label>
+        <ion-input type="email" [(ngModel)]="username"></ion-input>
+      </ion-item>
+    
+      <ion-item color="none">
+        <ion-label position="floating">
+          <ion-icon name="lock"></ion-icon> Password</ion-label>
+        <ion-input [attr.type]="isPassword?'password':'text'" [(ngModel)]="password" id="pw"></ion-input>
+        <ion-icon class="uncover" style="color: white; padding-top: 25px;" name="eye" slot="end" (click)="showpassword()"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <p id="error" style="color: red; font-size: 12px; text-align: center;"></p>
 
-    <ion-item>
-      <ion-label position="floating">
-        <ion-icon name="person"></ion-icon>
-        Username</ion-label>
-      <ion-input type="text" [(ngModel)]="username"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">
-        <ion-icon name="lock"></ion-icon>
-        Password</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
-
-  </ion-list>
-
-  <ion-button fill="solid" expand="block" color="dark" class="submitbtn" (click)="login()">Login</ion-button>
-  <ion-row>
+    <ion-button fill="solid" expand="block"  color="dark" class="submitbtn" (click)="login()">Login</ion-button>
+    <ion-row>
     <div class="center">
       Create an account, <a routerLink="/register" style="text-decoration:none">Register</a>
     </div>
   </ion-row>
 </div>
-<script>
-</script>
 </ion-content>

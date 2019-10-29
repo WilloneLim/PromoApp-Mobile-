@@ -1,5 +1,31 @@
+.formcs {
+    --background: url(../../assets/images/bg.png) 0 0/100% 100% no-repeat;
+    --padding: 20px;
+}
+
+.register {
+    margin-top: 30%;
+}
+
+ion-item {
+    // margin: 0px 20px;
+    // --background: rgba(0,0,0,0);
+    --color: white;
+    // --highlight-color-focused: white;
+    // --ion-color-primary:white;
+}
+
+.bg-transparent {
+    background: transparent;
+}
+
 .registerfirst {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    color: white;
+}
+
+.uncover {
+    font-size: 20px;
 }

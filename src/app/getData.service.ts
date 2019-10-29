@@ -19,9 +19,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
       
     }
    
-    update_promotion(recordID,record){
-      this.firestore.doc('promotions/' + recordID).update(record);
-    }
+    // update_promotion(recordID,record){
+    //   this.firestore.doc('promotions/' + recordID).update(record);
+    // }
    
    
   }
