@@ -16,16 +16,17 @@
 
   <ion-item-divider>
     <ion-label>Recent promotions</ion-label>
-    <ion-button class="ion-margin-end" size="small" slot="end"  fill="outline" (click)="viewDetails()">
+    <a routerLink="/tabs/promotions" style="text-decoration:none; margin-left: auto; font-size: 12px;">View more</a>
+    <!-- <ion-button class="ion-margin-end" size="small" slot="end"  fill="outline" (click)="viewDetails()">
       <ion-icon name="arrow-round-forward"></ion-icon>
-    </ion-button>
+    </ion-button> -->
   </ion-item-divider>
   
   <ion-grid>
     <ion-col>
       <ion-slides [options]="imgSlideOpt" class="slides">
-        <ion-slide *ngFor="let promo of promotions">
-          <ion-card button [routerLink]="['/tabs/post', promo.id]">
+        <ion-slide *ngFor="let promo of promolist">
+          <ion-card button [routerLink]="['/details', promo.id]">
             <img [src]="promo.url"/>
             <ion-card-header>
               <ion-card-title>{{promo.Name}}</ion-card-title>

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card >
+    <ion-img [src]="promo.image"></ion-img>
+    <ion-card-content>
+      <p>{{promo.title}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" (click)="scanQR()">Scan QR</ion-button>
+
+</ion-content>

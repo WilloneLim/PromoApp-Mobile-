@@ -15,7 +15,7 @@
   </ion-card> -->
   <ion-grid>
     <ion-row>
-      <ion-card no-padding *ngFor="let promo of promotions">
+      <ion-card no-padding *ngFor="let promo of promolist" button [routerLink]="['/details', promo.id]">
         <img *ngIf="promo.url" [src]="promo.url"/>
         <ion-card-header>
           <ion-card-title>{{promo.Name}}</ion-card-title>

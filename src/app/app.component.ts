@@ -24,6 +24,9 @@ export class AppComponent {
   ) {
     this.initializeApp();
 
+    this.platform.backButton.subscribeWithPriority(9999, () => {
+        console.log("Back to promotion page!")
+    })
 
     this.platform.backButton.subscribe(() => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {

@@ -48,9 +48,9 @@ export class LoginPage implements OnInit {
 				this.username = ""
 				this.password = ""
 
-				this.presentToast()
+				//this.presentToast()
 				console.log("Welcome" + " " + username + " " + this.user.getUID())
-        this.presentToast()
+        //this.presentToast()
         this.router.navigate(['/tabs'])
 			}
 		

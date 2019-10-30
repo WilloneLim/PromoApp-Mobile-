@@ -26,6 +26,10 @@ export class TransactionService {
     return this.firestore.collection(' promotester');
   }
 
+  delete_promotion() {
+    
+  }
+
   checkTime(i) {
     var i;
 

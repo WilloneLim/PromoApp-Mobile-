@@ -1,12 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router'
 import * as firebase from 'Firebase';
-import { getData } from '../../app/getData.service';
+import { Promo, getData } from '../../app/getData.service';
 import { IonSlides, Platform } from '@ionic/angular';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { snapshotChanges } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, switchMap } from 'rxjs/operators';
+
+export interface Item { title: string; image: string; }
 
 @Component({
   selector: 'app-home',
@@ -18,8 +20,8 @@ export class HomePage implements OnInit {
   promotions: any;
   public greet;
   public title: string;
-  promolist = [];
- 
+  //promolist: Promo[];
+  promolist =[];
 
   @ViewChild(IonSlides) slides:IonSlides;
   constructor(
@@ -60,47 +62,54 @@ export class HomePage implements OnInit {
   };
   
   ngOnInit(): void {
-   const postData = [];
+
    var userid = this.afAuth.auth.currentUser;
    var getid = userid.uid;
    console.log(getid);
-   
 
-
-  //  this.afs.firestore.collection('promotions')
-  //  .where('promoter', '==', getid)
-  //  .get()
-  //  .then(function(querySnapshot){
-  //    querySnapshot.forEach(doc=>{
-  //       //console.log(doc.id, "=>", doc.data());
-  //       this.promolist.push({
-  //         id: doc.id,
-  //         Name: doc.data().title,
-  //         Description: doc.data().desc,
-  //         startDate: doc.data().startdate,
-  //       })
-  //    });
-  //  }).catch(function(error){
-  //    console.log(error);
+   //TEMPPPP
+  //  this.getData.getpromo().subscribe(res => {
+  //    this.promolist = res;
   //  })
 
 
+   this.afs.firestore.collection('promotions')
+   .where('promoter', '==', getid)
+   .limit(4)
+   .get()
+   .then(querySnapshot => {
+     querySnapshot.forEach(doc=>{
+        console.log(doc.id, "=>", doc.data());
+        this.promolist.push({
+          id: doc.id,
+          Name: doc.data().title,
+          Description: doc.data().desc,
+          url: doc.data().image,
+          startDate: doc.data().startdate,
+          endDate: doc.data().enddate
+        })
+     });
+   }).catch(function(error){
+     console.log(error);
+   })
 
-    this.getData.read_promotion().subscribe(data => {
+
+
+    // this.getData.read_promotion().subscribe(data => {
  
-      this.promotions = data.map(e => {
-        return {
-          id: e.payload.doc.id,
-          Description: e.payload.doc.data()['desc'],
-          Name: e.payload.doc.data()['title'],
-          url: e.payload.doc.data()['image'],
-          startDate: e.payload.doc.data()['startdate'],
-          endDate: e.payload.doc.data()['enddate'],
-        };
-      })
-      console.log(this.promotions);
+    //   this.promotions = data.map(e => {
+    //     return {
+    //       id: e.payload.doc.id,
+    //       Description: e.payload.doc.data()['desc'],
+    //       Name: e.payload.doc.data()['title'],
+    //       url: e.payload.doc.data()['image'],
+    //       startDate: e.payload.doc.data()['startdate'],
+    //       endDate: e.payload.doc.data()['enddate'],
+    //     };
+    //   })
+    //   console.log(this.promotions);
  
-    });
+    // });
    
   }
 
