@@ -236,17 +236,17 @@ export class AccountPage implements OnInit {
   showCroppedImage(ImagePath){
     //this.isLoading = true;
     var copyPath = ImagePath;
-    var splitPath = copyPath.split('/');
-    var imageName = splitPath[splitPath.length-1];
-    var filePath = ImagePath.split(imageName)[0];
+   // var splitPath = copyPath.split('/');
+   // var imageName = splitPath[splitPath.length-1];
+   // var filePath = ImagePath.split(imageName)[0];
  
-    this.file.readAsDataURL(filePath,imageName).then(base64=>{
-        this.croppedImagepath = base64;
-        this.isLoading = false;
-    },error=>{
-      alert('Error in showing image' + error);
-      this.isLoading = false;
-    });
+    //this.file.readAsDataURL(filePath,imageName).then(base64=>{
+        this.croppedImagepath;
+        //this.isLoading = false;
+    //},error=>{
+     // alert('Error in showing image' + error);
+      //this.isLoading = false;
+    //});
   }
 
 

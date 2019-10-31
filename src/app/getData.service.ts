@@ -26,17 +26,16 @@ export interface Promo {
     ) {
       // var getid = afAuth.auth.currentUser;
 
-      // this.promoCollection = afs.collection<Promo>('promotions', 
-      // ref => ref.where('promoter', '==', getid))
-      // this.promo = this.promoCollection.snapshotChanges().pipe(
-      //   map(actions => {
-      //     return actions.map(a => {
-      //       const data = a.payload.doc.data();
-      //       const id = a.payload.doc.id;
-      //       return { id, ...data};
-      //     });
-      //   })
-      // );
+      this.promoCollection = afs.collection<Promo>('promotions');
+      this.promo = this.promoCollection.snapshotChanges().pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data();
+            const id = a.payload.doc.id;
+            return { id, ...data};
+          });
+        })
+      );
     }
    
     getpromo() {

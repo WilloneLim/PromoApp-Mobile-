@@ -44,11 +44,13 @@ export class PromotionsPage implements OnInit {
   scannedData:any = {};
   preventBack: any;
   promolist = [];
+  promo: Array<string>;
   getid: any;
   promoitem: any;
   promoter: any;
   isCancelled: boolean;
   doc1: any;
+  checklist = [];
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -128,13 +130,12 @@ export class PromotionsPage implements OnInit {
     
       // this.afs.firestore.collection('claiming').get().then((snapshot)=>{
       //   snapshot.docs.forEach(doc1 => {
-      //     console.log(doc1.id + " "
-      //     + doc1.data().title)
           
       //     var data1 = doc1.data();
       //     var labeldata = doc1.data();
       //     var promotionTitle = data1.title;
       //     var promotionID = data1.promotion;
+
       //   })
       // })
   }
@@ -148,6 +149,10 @@ export class PromotionsPage implements OnInit {
       await alert.present()
   }
 
+  //passing qr code data
+  // async transfer(scannedData){
+  //   this.router.navigate(['/transactions', scannedData])
+  // }
 
   scanQRCode () {
     this.options= {
@@ -169,6 +174,7 @@ export class PromotionsPage implements OnInit {
         this.isCancelled = true;
         this.navCtrl.navigateForward('/tabs/promotions');
       }
+      this.navCtrl.navigateForward('/transactions');
 
       this.afs.firestore.collection('claiming').get().then((snapshot)=>{
         snapshot.docs.forEach(doc1 => {
@@ -176,48 +182,55 @@ export class PromotionsPage implements OnInit {
           + doc1.data().title)
           
           var data1 = doc1.data();
-          var labeldata = doc1.data();
           var promotionTitle = data1.title;
-          var promotionID = data1.promotion;
+          var promoterid = data1.promoterID;
+          this.checklist = promoterid
+        })})
+
+        if(this.checklist == this.getid){
+          console.log('YES');
+        }
+
+          
         
      
 
      
-      this.afs.firestore.collection('promotions').get().then((snapshot)=>{
-        snapshot.docs.forEach(doc2 => {
-          console.log(doc2.id + " "
-          + doc2.data().title)
+  //     this.afs.firestore.collection('promotions').get().then((snapshot)=>{
+  //       snapshot.docs.forEach(doc2 => {
+  //         console.log(doc2.id + " "
+  //         + doc2.data().title)
 
-          var data2 = doc2.data();
-          var promotionTitle2 = data2.title;
-          var promotionID2 = doc2.id;
-          var promoter = data2.promoter;
+  //         var data2 = doc2.data();
+  //         var promotionTitle2 = data2.title;
+  //         var promotionID2 = doc2.id;
+  //         var promoter = data2.promoter;
     
           
-          // if (claiminig . promtions == promotions . docid )
-          // this.afs.firestore.collection('promoters').doc(user.uid)
-          // .get().then(doc=>{
+  //         // if (claiminig . promtions == promotions . docid )
+  //         // this.afs.firestore.collection('promoters').doc(user.uid)
+  //         // .get().then(doc=>{
 
           
-          if(doc1.exists){
-            if(qrlength == 20 && promotionTitle == promotionTitle2 && promotionID == promotionID2){
-              this.navCtrl.navigateForward('/transactions');
+  //         if(doc1.exists){
+  //           if(qrlength == 20 && promotionTitle == promotionTitle2 && promotionID == promotionID2){
+  //             this.navCtrl.navigateForward('/transactions');
               
-            }else{
-              return this.presentAlert('Error','Invalid QR Code') 
-            }
-          }else if(this.user.getUID != promoter && promoter == null){
-              return this.presentAlert('Error', 'QR Code for different promoter')
+  //           }else{
+  //             return this.presentAlert('Error','Invalid QR Code') 
+  //           }
+  //         }else if(this.user.getUID != promoter && promoter == null){
+  //             return this.presentAlert('Error', 'QR Code for different promoter')
               
-          }else{
-            return this.presentAlert('Error','QR Not Found')
-          }
+  //         }else{
+  //           return this.presentAlert('Error','QR Not Found')
+  //         }
           
-        //})
-       }) 
-      })
-    })
-  })
+  //       //})
+  //      }) 
+  //     })
+  //   })
+  // })
         //  if(){
         //   this.navCtrl.navigateForward('/transactions');
         //  }else{
