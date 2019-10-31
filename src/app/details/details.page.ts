@@ -34,10 +34,15 @@ export class DetailsPage implements OnInit {
   }
 
   loadPromo() {
+    // console.log(this.promoId);
     this.getData.getPromo(this.promoId).subscribe(res => {
       this.promo = res;
       console.log(this.promo.image);
     })
+  }
+
+  scanQR() {
+    
   }
 
 }

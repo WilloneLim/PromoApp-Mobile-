@@ -161,6 +161,7 @@ export class PromotionsPage implements OnInit {
 
     this.scanner.scan(this.options).then((data) => {
       this.scannedData = data;
+      window.alert(data);
       console.log(data.text.length);
       let qrlength = data.text.length;
       
@@ -180,8 +181,6 @@ export class PromotionsPage implements OnInit {
           var promotionTitle = data1.title;
           var promotionID = data1.promotion;
         
-     
-
      
       this.afs.firestore.collection('promotions').get().then((snapshot)=>{
         snapshot.docs.forEach(doc2 => {
