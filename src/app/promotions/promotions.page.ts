@@ -166,6 +166,7 @@ export class PromotionsPage implements OnInit {
 
     this.scanner.scan(this.options).then((data) => {
       this.scannedData = data;
+      window.alert(data);
       console.log(data.text.length);
       let qrlength = data.text.length;
       
@@ -193,7 +194,7 @@ export class PromotionsPage implements OnInit {
 
           
         
-     
+    
 
      
   //     this.afs.firestore.collection('promotions').get().then((snapshot)=>{
@@ -205,7 +206,7 @@ export class PromotionsPage implements OnInit {
   //         var promotionTitle2 = data2.title;
   //         var promotionID2 = doc2.id;
   //         var promoter = data2.promoter;
-    
+
           
   //         // if (claiminig . promtions == promotions . docid )
   //         // this.afs.firestore.collection('promoters').doc(user.uid)

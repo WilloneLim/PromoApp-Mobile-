@@ -24,6 +24,18 @@ export interface Promo {
       private afs: AngularFirestore,
       private afAuth: AngularFireAuth
     ) {
+
+        this.promoCollection = afs.collection<Promo>('promotions');
+    
+        this.promo = this.promoCollection.snapshotChanges().pipe(
+          map(actions => {
+            return actions.map(a => {
+              const data = a.payload.doc.data();
+              const id = a.payload.doc.id;
+              return { id, ...data};
+            });
+          })
+        );
       // var getid = afAuth.auth.currentUser;
 
       this.promoCollection = afs.collection<Promo>('promotions');
