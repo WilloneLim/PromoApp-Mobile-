@@ -1,29 +1,32 @@
 .promodate{
-    background: rgb(218, 215, 215);
-    color: #34acf7;
-    border: 2px solid transparent;
-    border-radius: 8px;
-  }
+  background: rgb(45, 186, 241);
+  color: #fff;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+
+.title {
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
 
  ion-card {
-   display: block;
+   display: flex;
+   flex-direction: column;
+   height: 100% !important;
+   margin: 0 !important;
  }
-
+ 
  ion-content {
    text-align: center;
+   font-weight: bold;
  }
 
- .promodate {
-   outline: none;
+ ion-card-title {
+   font-weight: bold;
+   font-size: 12px;
  }
 
- .sticky {
-   top: 7.3%;
-   position: fixed;
-   width: 100%;
-   z-index: 1;
- }
-
- ion-button {
-   --background: #fc6435;
+ .fixline{
+   font-size: 12px;
  }

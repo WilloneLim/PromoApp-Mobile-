@@ -16,7 +16,6 @@
 					<ion-row>
 						<!-- <ion-img src=""></ion-img> -->
 						<ion-col size="12" class="userimage">
-							<p *ngIf="isLoading">Loading....</p>
 							<img [src]= croppedImagepath  class="profimg"/> 
 							<ion-icon name="camera" class="editIcon"(click)="openImagePickerCrop()"></ion-icon>
 							<span class="profname">{{ username }}</span>

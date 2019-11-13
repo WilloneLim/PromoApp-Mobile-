@@ -23,7 +23,7 @@ export class DetailsPage implements OnInit {
   }
   promoId = null;
   options: BarcodeScannerOptions;
-  isCancelled: boolean;
+  isCancelled: boolean = true;
   scannedData:any = {};
   check= [];
   data1=[];
@@ -74,34 +74,19 @@ export class DetailsPage implements OnInit {
       prompt: 'Scan your QRcode'
     };
 
+    this.isCancelled = false;
     this.scanner.scan(this.options).then((data) => {
       this.scannedData = data;
       console.log(data.text.length);
       let qrlength = data.text.length;
-      
-      this.isCancelled = false;
-      if(data.cancelled){
-        this.isCancelled = true;
-        this.navCtrl.navigateForward('/tabs/promotions');
-      }
-      this.navCtrl.navigateForward('/transactions');
+      this.isCancelled = true;
 
-      this.afs.firestore.collection('claiming').get().then((snapshot)=>{
-        snapshot.docs.forEach(doc1 => {
-          console.log(doc1.id + " "
-          + doc1.data().title)
-          
-          var data1 = doc1.data();
-          var promotionTitle = data1.title;
-          var promoterid = data1.promoterID;
-          this.check = promoterid;
-        })})
 
             if(qrlength == 20){
               this.navCtrl.navigateForward('/transactions');
               
             }else{
-              return this.presentAlert('Error','Invalid QR Code') 
+              this.presentAlert('Error','Invalid QR Code')   
             }
         
 
@@ -152,6 +137,7 @@ export class DetailsPage implements OnInit {
         // }
             
       }, (err) => {
+        this.isCancelled = true;
       console.log('Error: ',err);
     })
   }
@@ -163,6 +149,10 @@ export class DetailsPage implements OnInit {
       buttons: ['OK']
     })
     await alert.present()
-}
+  }
+
+  ionViewCanLeave() {
+    return this.isCancelled;
+  }
 }
 

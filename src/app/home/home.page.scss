@@ -17,38 +17,56 @@
   //   }
 
 
+
   ion-toolbar {
     --background:  transparent !important;
-    --ion-color-base: transparent !important;
-    
+    --ion-color-base: transparent !important; 
   }
 
   .greetings{
     background: linear-gradient(
-      rgba(231, 91, 10, 0.564),
       rgba(0, 0, 0, 0.5)
-    ),url(../../assets/images/bgpromo.jpg);
+    ),url(../../assets/images/discount.jpg);
     background-size: cover !important;
     position: relative;
-    height: 160px;
+    height: 200px;
     border-color: transparent !important;
     background-repeat: no-repeat !important;
+  }
+
+  .btnStart{
+    position: absolute;
+    background-color: transparent;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    top: 70%;
+    left: 10%;
   }
   
   .scroll-content {
     padding-top: 0 !important;
-}
+  }
+
+  ion-item-divider{
+   background-color: rgb(248, 246, 246);
+   color: #000;
+   font-weight: bold;
+  }
+  
+  a{
+    color: rgb(65, 160, 201);
+  }
 
   .module{
     position: absolute;
-    top: 10%;
+    top: 30%;
     left: 10%;
     color: #fff;
     text-align: left;
-    font-size: 24px;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 30px;
+    font-family: sans-serif;
   }
-
 
 //  ion-card{
 //     display: contents;
@@ -57,19 +75,24 @@
 //     margin: 0 !important;
 //   }
 
-.background{
-   //--background: #fff;
-  
+ion-card-title {
+  font-weight: bold;
+  color: #000;
 }
 
-ion-toolbar{
-   // --background: #24d6ea;
+.test {
+  background-color: white;
 }
+
+.background{
+   --background: #F8F8F8; 
+}
+
 
 
 .promodate{
-  background: rgb(218, 215, 215);
-  color: #34acf7;
+  background: rgb(45, 186, 241);
+  color: #fff;
   border: 2px solid transparent;
   border-radius: 8px;
 }

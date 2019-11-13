@@ -1,22 +1,23 @@
-<ion-header no-border translucent="true">
+<!-- <ion-header no-border translucent="true">
   <ion-toolbar>
     <ion-title>Home</ion-title> 
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content fullscreen="true" class="background">
   <div class="greetings">
-  <div class="module">
-    <span><b>{{greet}}</b>,</span>
-    <br/>
-    <span>Enchanted wardrobe</span>
-  </div>
+    <div class="module">
+      <span><b>{{time}}</b><br/></span>
+      <span><b>{{greet}}</b></span>
+      <span>{{username}}</span>
+    </div>
+    <button class="btnStart" routerLink="/tabs/promotions">Scan now</button>
   </div>
 
 
   <ion-item-divider>
     <ion-label>Recent promotions</ion-label>
-    <a routerLink="/tabs/promotions" style="text-decoration:none; margin-left: auto; margin-right: 5px; font-size: 12px;">View more</a>
+    <a routerLink="/tabs/promotions" style="text-decoration:none; margin-left: auto; margin-right: 5px; font-size: 12px;">See More ></a>
     <!-- <ion-button class="ion-margin-end" size="small" slot="end"  fill="outline" (click)="viewDetails()">
       <ion-icon name="arrow-round-forward"></ion-icon>
     </ion-button> -->
@@ -26,7 +27,7 @@
     <ion-col>
       <ion-slides [options]="imgSlideOpt" class="slides">
         <ion-slide *ngFor="let promo of promolist">
-          <ion-card button [routerLink]="['/details', promo.id]">
+          <ion-card button [routerLink]="['/details', promo.id]" class="test">
             <img [src]="promo.url"/>
             <ion-card-header>
               <ion-card-title>{{promo.Name}}</ion-card-title>
@@ -42,5 +43,4 @@
 
     </ion-col>
   </ion-grid>
-  <script src="../../assets/js/greetings.js"></script>
 </ion-content>

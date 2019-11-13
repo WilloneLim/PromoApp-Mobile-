@@ -5,33 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <!-- <div class="QRScanner">
-    <ion-button expand="block" icon-left (click)="scanQRCode()"><ion-icon name="qr-scanner"></ion-icon>Scan code</ion-button>
-  </div> -->
-  <!-- <ion-card *ngIf="scannedData">
-    <ion-card-content>
-      <p>QR CODE: {{scannedData}}</p>
-    </ion-card-content>
-  </ion-card> -->
+  <div class="title">
+    <span>My Promotions</span>
+  </div>
   <ion-grid>
     <ion-row>
-      <ion-card no-padding *ngFor="let promo of promolist" button [routerLink]="['/details', promo.id]">
+      <ion-col *ngFor="let promo of promolist" col-6 no-padding>
+      <ion-card button [routerLink]="['/details', promo.id]">
         <img *ngIf="promo.url" [src]="promo.url"/>
         <ion-card-header>
           <ion-card-title>{{promo.Name}}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
+        <ion-card-content class="fixline">
           <p>{{ promo.Description }}</p>
           
          <button class="promodate" onClick="extDate">{{promo.startDate}} - {{promo.endDate}}</button>
         </ion-card-content>
       </ion-card>  
-      <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-        <ion-infinite-scroll-content
-          loadingSpinner="bubbles"
-          loadingText="Loading more data...">
-        </ion-infinite-scroll-content>
-      </ion-infinite-scroll> -->
+    </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

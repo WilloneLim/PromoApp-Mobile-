@@ -70,11 +70,6 @@ export class PromotionsPage implements OnInit {
     public toast: ToastController
 
   ) { 
-    //Exit scanner when back button is pressed
-    // this.platform.backButton.subscribeWithPriority(0, () => {
-    // }
-    
-   
   }
 
   
@@ -149,15 +144,9 @@ export class PromotionsPage implements OnInit {
       await alert.present()
   }
 
-  //passing qr code data
-  // async transfer(scannedData){
-  //   this.router.navigate(['/transactions', scannedData])
-  // }
-
   scanQRCode () {
     this.options= {
       preferFrontCamera : false, 
-      //showFlipCameraButton : true, 
       showTorchButton:true,
       disableSuccessBeep: false,
       torchOn: false,
@@ -166,8 +155,6 @@ export class PromotionsPage implements OnInit {
 
     this.scanner.scan(this.options).then((data) => {
       this.scannedData = data;
-      window.alert(data);
-      console.log(data.text.length);
       let qrlength = data.text.length;
       
       this.isCancelled = false;
@@ -175,7 +162,7 @@ export class PromotionsPage implements OnInit {
         this.isCancelled = true;
         this.navCtrl.navigateForward('/tabs/promotions');
       }
-      this.navCtrl.navigateForward('/transactions');
+      //this.navCtrl.navigateForward('/transactions');
 
       this.afs.firestore.collection('claiming').get().then((snapshot)=>{
         snapshot.docs.forEach(doc1 => {
@@ -190,6 +177,12 @@ export class PromotionsPage implements OnInit {
 
         if(this.checklist == this.getid){
           console.log('YES');
+        }
+
+        if(qrlength == 20){
+          this.presentAlert('HOLA', 'The lenght is 20')
+        }else{
+          this.presentAlert('TOO BAD', 'WRONG QR')
         }
 
           

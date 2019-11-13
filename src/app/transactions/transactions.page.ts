@@ -54,7 +54,8 @@ export class TransactionsPage implements OnInit {
       this.transaction.create_trans().add({
         //Amount: 'RM' + this.amount,
         Amount: this.amount,
-        Created: this.transaction.created(),
+        //Created: this.transaction.created(),
+        Created: firebase.firestore.FieldValue.serverTimestamp(),
         Promoter: this.getid
       });
       // this.transaction.add_promoterloyaltyPoints().update({

@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { snapshotChanges } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { map, switchMap } from 'rxjs/operators';
+import { UserService } from '../user.service';
 
 export interface Item { title: string; image: string; }
 
@@ -19,6 +20,7 @@ export class HomePage implements OnInit {
 
   promotions: any;
   public greet;
+  public time;
   public title: string;
   //promolist: Promo[];
   promolist =[];
@@ -29,19 +31,37 @@ export class HomePage implements OnInit {
     private getData: getData,
     private platform: Platform,
     private afs: AngularFirestore,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    public user: UserService
     ) {
-  
-  var myDate = new Date();
-  var hrs = myDate.getHours();
 
-  if (hrs < 12)
+  var myDate = new Date();
+  var hours = myDate.getHours();
+  var min = myDate.getMinutes();
+  min = this.checkTime(min);
+  
+  if (hours < 12)
     this.greet = "Good Morning";
-  else if (hrs >= 12 && hrs <= 17)
+  else if (hours >= 12 && hours <= 17)
     this.greet = "Good Afternoon";
-  else if (hrs >= 17 && hrs <= 24)
+  else if (hours >= 17 && hours <= 24)
     this.greet = "Good Evening";
 
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+  
+    this.time = hours + ":" + min + ' ' + ampm;
+  
+  }
+
+  checkTime(i) {
+    var i;
+
+    if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
   }
 
 
@@ -56,8 +76,8 @@ export class HomePage implements OnInit {
     initialSlide: 0,
     slidesPerView: 1,
     autoplay: {
-      delay: 2000,
-      disableOnInteraction: false
+    delay: 2000,
+    disableOnInteraction: false
     }
   };
   

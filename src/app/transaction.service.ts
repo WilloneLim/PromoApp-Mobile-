@@ -41,7 +41,7 @@ export class TransactionService {
 
   created() {
     var d = new Date();
-    //var month = '' + (d.getMonth() + 1);
+    var month = '' + (d.getMonth() + 1);
     var day = '' + d.getDate();
     var year = d.getFullYear();
     var h = d.getHours();
@@ -51,28 +51,28 @@ export class TransactionService {
     m = this.checkTime(m);
     s = this.checkTime(s);
 
-    // if (month.length < 2) 
-    //     month = '0' + month;
-    // if (day.length < 2) 
-    //     day = '0' + day;
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
 
    //**TEMP *//
-   var month = new Array();
-    month[0] = "January";
-    month[1] = "February";
-    month[2] = "March";
-    month[3] = "April";
-    month[4] = "May";
-    month[5] = "June";
-    month[6] = "July";
-    month[7] = "August";
-    month[8] = "September";
-    month[9] = "October";
-    month[10] = "November";
-    month[11] = "December";
-    var n = month[d.getMonth()];
+  //  var month = new Array();
+  //   month[0] = "January";
+  //   month[1] = "February";
+  //   month[2] = "March";
+  //   month[3] = "April";
+  //   month[4] = "May";
+  //   month[5] = "June";
+  //   month[6] = "July";
+  //   month[7] = "August";
+  //   month[8] = "September";
+  //   month[9] = "October";
+  //   month[10] = "November";
+  //   month[11] = "December";
+  //   var n = month[d.getMonth()];
     
-    return [day + ' ' + n + ' ' + year]
+    return [month + '/' + day + '/' + year]
   }
 
 }
