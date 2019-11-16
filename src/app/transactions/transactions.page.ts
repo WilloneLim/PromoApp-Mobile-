@@ -3,7 +3,7 @@ import { NavController, AlertController, ModalController, ToastController } from
 import { ModalPagePage } from '../modal-page/modal-page.page';
 import { TransactionService } from '../../app/transaction.service';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router'
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { QRService } from '../../app/qr.service';
@@ -51,6 +51,7 @@ export class TransactionsPage implements OnInit {
     private route: ActivatedRoute,
     private afAuth: AngularFireAuth,
     private usersinfo: UserService,
+    public router: Router,
     public alertController: AlertController
   ) {
    }
@@ -65,20 +66,22 @@ export class TransactionsPage implements OnInit {
 
     this.qrservice.getClaim(this.scannedData).subscribe(res => {
       this.claim = res;
-      if (this.claim.promotion == this.promo){
-        this.claimer = this.claim.user;
-        window.alert("Correct: " + this.claim.promotion + " = " + this.promo);
+      if (this.claim == undefined){
+          this.errormsg();
       }else{
-        
-        window.alert("inCorrect: " + this.claim.promotion + " = " + this.promo);
-        // this.presentAlert('Error','Invalid QR Code');
+          if (this.claim.promotion == this.promo){
+            this.claimer = this.claim.user;
+          }else{
+            this.errormsg();
+          }
       }
-
-
+      
     })
+  }
 
-    
-    
+  async errormsg(){
+    window.alert("Incorrect promotion or used QR code"); 
+    this.navCtrl.pop();
   }
 
 

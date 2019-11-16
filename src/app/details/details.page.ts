@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router'
-import {AngularFirestore} from '@angular/fire/firestore'
+import {ActivatedRoute, Router} from '@angular/router';
+import {AngularFirestore} from '@angular/fire/firestore';
 import { getData, Promo } from '../../app/getData.service';
 import { QRService } from '../../app/qr.service';
 import { BarcodeScanner, BarcodeScannerOptions} from '@ionic-native/barcode-scanner/ngx';
