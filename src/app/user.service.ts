@@ -2,17 +2,25 @@ import { Injectable } from '@angular/core'
 import { AngularFireAuth } from '@angular/fire/auth'
 import { first } from 'rxjs/operators'
 import { auth } from 'firebase/app'
+import { AngularFirestore } from '@angular/fire/firestore';
+import { take } from 'rxjs/operators';
 
 interface user {
 	username: string,
 	uid: string
 }
 
+export interface userinfo {
+	username: string,
+	transactions: string,
+	vault: Array<String>
+}
+
 @Injectable()
 export class UserService {
 	private user: user
 
-	constructor(private afAuth: AngularFireAuth) {
+	constructor(private afAuth: AngularFireAuth, private firestore: AngularFirestore) {
 
 	}
 
@@ -54,5 +62,9 @@ export class UserService {
 
 	getUID(): string {
 		return this.user.uid
+	}
+
+	getUserInfo(id){
+		return this.firestore.collection('users').doc<userinfo>(id).valueChanges();
 	}
 }

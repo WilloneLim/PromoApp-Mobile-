@@ -83,7 +83,11 @@ export class DetailsPage implements OnInit {
 
 
             if(qrlength == 20){
-              this.navCtrl.navigateForward('/transactions');
+              // this.navCtrl.navigateForward('/transactions', this.scannedData);
+              // // this.router.navigate(['/transactions', 'id', this.scannedData]);
+              this.router.navigate(['/transactions'], { queryParams: { scan: data.text , promo: this.promoId} });
+              // window.alert(data.text);
+              
               
             }else{
               this.presentAlert('Error','Invalid QR Code')   
