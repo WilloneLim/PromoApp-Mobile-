@@ -40,7 +40,7 @@
     "core-js": "^2.5.4",
     "firebase": "^6.3.0",
     "ngx-qrcode2": "0.0.9",
-    "normalize-url": "^4.3.0",
+    "normalize-url": "^4.5.1",
     "npm-user-service": "0.0.0",
     "phonegap-plugin-barcodescanner": "^8.1.0",
     "rxjs": "~6.5.1",
